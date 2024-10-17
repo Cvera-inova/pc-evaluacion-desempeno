@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    image: frontend-repository-evaluacion
+    container_name: procesos-evaluacion-docker-nextjs-1
+    ports:
+      - "3025:3000"
+    env_file:
+      - .env
+    networks:
+      my_new_network:
+        ipv4_address: 10.13.10.10  # Cambias la IP aquí
+
+networks:
+  my_new_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.13.0.0/16  # Mantienes esta subred
